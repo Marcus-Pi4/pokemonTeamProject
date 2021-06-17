@@ -1,45 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--CSS Framework-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-yellow.min.css" />
     <!--Our Stylesheet-->
-    <link rel="stylesheet" href="./assets/stylesheet.css">
+    <link rel="stylesheet" href="./assets/stylesheet.css" />
     <title>Pokemon Search Project</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <h1>Pokemon Search Project</h1>
+      <h1>Pokemon Search Project</h1>
     </header>
     <sidebar>
         <input type="text" name="search" placeholder="Pokemon or Move" id="search-input"></input>
         <input type="submit" value="Search" id="submit-button"></input>
     </sidebar>
-    <div id="content1" class="container">
+
+    <div id="content1" class="content">
 
     </div>
-    <div id="content2" class="container">
+    <div id="content2">
 
     </div>
-    <div id="content3" class="container">
+    <div id="content3">
 
     </div>
-    <footer>
-        <p>Please check out these links for more information:<br />
-        <a href="https://www.serebii.net/">Serebii.net</a> <br />
-        <a href="https://www.smogon.com/">Smogon.com</a>    
-        </p>
+    <footer class="mdl-mega-footer">
+        <div class="mdl-mega-footer__bottom-section">
+            <div class="mdl-logo">Please check out these links for more information:</div><br />
+                <ul class="mdl-mega-footer__link-list">
+                    <li><a href="https://www.serebii.net/">Serebii.net</a></li>
+                    <li><a href="https://www.smogon.com/">Smogon.com</a></li>
+                </ul>
+            </div>
+        </div>
     </footer>
-    <script src="./assets/script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-
+    <!--<footer>
+      <p>
+        Please check out these links for more information:<br />
+        <a href="https://www.serebii.net/">Serebii.net</a> <br />
+        <a href="https://www.smogon.com/">Smogon.com</a>
+      </p>
+    </footer>-->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="./assets/script.js"></script> 
+  </body>
 </html>
