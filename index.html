@@ -26,15 +26,15 @@
                     <ul class='mdl-list'>
                         <li class="mdl-list__item">
                             <form action="#">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                                    <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
-                                        <i class="material-icons">search</i>
-                                    </label> <br />
+                                <div class="mdl-textfield mdl-js-textfield">
                                     <div class="mdl-textfield">
                                         <input class="mdl-textfield__input" type="text" id="sample6">
                                         <label class="mdl-textfield__label" for="sample-expandable">Pokemon or Move</label>
-                                    </div>
+                                    </div>  
                                 </div>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                    <i class="material-icons">search</i>Search
+                                </button>
                             </form>
                         </li>
                         <li class="mdl-list__item">
@@ -42,8 +42,8 @@
                                 Pokemon
                             </span>
                             <span class="mdl-list__item-secondary-action">
-                                <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-1">
-                                    <input type="radio" id="list-option-1" class="mdl-radio__button" name="options" value="1" checked />
+                                <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pokemon">
+                                    <input type="radio" id="pokemon" class="mdl-radio__button" name="options" value="1" checked />
                                 </label>
                             </span>
                         </li>
@@ -52,8 +52,8 @@
                                 Move
                             </span>
                             <span class="mdl-list__item-secondary-action">
-                                <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-2">
-                                    <input type="radio" id="list-option-2" class="mdl-radio__button" name="options" value="1" checked />
+                                <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="moves">
+                                    <input type="radio" id="moves" class="mdl-radio__button" name="options" value="1" checked />
                                 </label>
                             </span>
                         </li>
@@ -62,19 +62,19 @@
                                 Filters:
                             </span>
                             <span class="mdl-list__item-secondary-action">
-                                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
-                                  <input type="checkbox" id="list-switch-1" class="mdl-switch__input" checked />
+                                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="filter-switch">
+                                    <input type="checkbox" id="filter-switch" class="mdl-switch__input" checked />
                                 </label>
                             </span>
                         </li>
                         <li class="mdl-list__item">
-                            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" id="filter-table">
                                 <thead>
                                     <tr>
                                         <th class="mdl-data-table__cell--non-numeric">Generation</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="filter-list">
                                     <tr>
                                         <td class="mdl-data-table__cell">1</td>
                                     </tr>
