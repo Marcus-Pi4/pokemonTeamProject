@@ -100,7 +100,7 @@ contentButton1.addEventListener("click", hideContent1);
 contentButton2.addEventListener("click", hideContent2);
 contentButton3.addEventListener("click", hideContent3);
 
-fetch('https://pokeapi.co/api/v2/pokemon/bulbasaur')
+fetch('https://pokeapi.co/api/v2/pokemon/ivysaur')
     .then(function (response) {
         return response.json();
     })
@@ -113,10 +113,23 @@ fetch('https://pokeapi.co/api/v2/pokemon/bulbasaur')
         console.log(data.weight);
         console.log(data.moves);
         console.log(data.sprites.back_default);
+        console.log(data.stats[0].base_stats);
+        for (var i = 0; i < data.stats.length; i++) {
+            console.log(data.stats[i].base_stat);
+        }
         for (var i = 0; i < data.types.length; i++) {
             console.log(data.types[i].type.name);
         }
         for (var i = 0; i < data.moves.length; i++) {
             console.log(data.moves[i].move.name);
         }
+    });
+fetch('https://pokeapi.co/api/v2/evolution-chain/1/')
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data.chain.species.name);
+        console.log(data.chain.evolves_to[0].evolves_to[0].species.name);
+
     });
