@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Favicon-->
+    <link rel="icon" id = "favicon" type="image/png" href="https://cdn2.bulbagarden.net/upload/6/64/Dream_Premier_Ball_Sprite.png"/>
+    <!--CSS Framework-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-yellow.min.css" />
+    <!--Our Stylesheet-->
+    <link rel="stylesheet" href="./assets/stylesheet.css" />
+    <title>Pokemon Search Project</title>
+  </head>
+
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout__title">Pokemon Search Project</span>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout__title">Search Bar</span>
+            <nav class="mdl-navigation">
+                <sidebar>
+                    <ul class='mdl-list'>
+                        <li class="mdl-list__item">
+                            <form action="#">
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <div class="mdl-textfield">
+                                        <input class="mdl-textfield__input" type="text" id="sample6">
+                                        <label class="mdl-textfield__label" for="sample-expandable">Pokemon or Move</label>
+                                    </div>  
+                                </div>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                    <i class="material-icons">search</i>Search
+                                </button>
+                            </form>
+                        </li>
+                        <li class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                Pokemon
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pokemon">
+                                    <input type="radio" id="pokemon" class="mdl-radio__button" name="options" value="1" checked />
+                                </label>
+                            </span>
+                        </li>
+                        <li class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                Move
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="moves">
+                                    <input type="radio" id="moves" class="mdl-radio__button" name="options" value="1" checked />
+                                </label>
+                            </span>
+                        </li>
+                        <li class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                Filters:
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="filter-switch">
+                                    <input type="checkbox" id="filter-switch" class="mdl-switch__input" checked />
+                                </label>
+                            </span>
+                        </li>
+                        <li class="mdl-list__item">
+                            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" id="filter-table">
+                                <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">Gen #</th>
+                                        <th>
+                                            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="expand-table">
+                                                <i class="material-icons">expand_more</i>
+                                            </button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="filter-list" style="display: none;">
+                                    <tr>
+                                        <td class="mdl-data-table__cell">1</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell">2</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell">3</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell">4</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell">5</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell">6</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell">7</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell">8</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                </sidebar>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div id="content1" class="content" style="border: 1px solid gray; border-radius: 15px;">
+                <header id="content-header1">
+                    <h2>Content Header</h2>
+                    <button id = "content-button1" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                        <i class="material-icons">expand_less</i>
+                    </button>
+                </header>
+                <p id="content-p1" style="display:content;">Content paragraph</p>
+            </div>
+            <div id="content2" class="content" style="border: 1px solid gray; border-radius: 15px;">
+                <header id="content-header2">
+                    <h2>Content Header</h2>
+                    <button id = "content-button2" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                        <i class="material-icons">expand_less</i>
+                    </button>
+                </header>
+                <p id="content-p2" style="display:content;">Content paragraph</p>
+            </div>
+            <div id="content3" class="content" style="border: 1px solid gray; border-radius: 15px;">
+                <header id="content-header3">
+                    <h2>Content Header</h2>
+                    <button id = "content-button3" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                        <i class="material-icons">expand_less</i>
+                    </button>
+                </header>
+                <p id="content-p3" style="display:content;">Content paragraph</p>
+            </div>
+            <!--Footer has to be within main for formatting.-->
+            <footer class="mdl-mega-footer">
+                <div class="mdl-mega-footer__bottom-section">
+                    <div class="mdl-logo">Please check out these links for more information:</div><br />
+                        <ul class="mdl-mega-footer__link-list">
+                            <li><a target="_blank" href="https://bulbapedia.bulbagarden.net/wiki/Main_Page">Bulbapedia.net</a></li>
+                            <li><a target="_blank" href="https://www.serebii.net/">Serebii.net</a></li>
+                            <li><a target="_blank" href="https://www.smogon.com/">Smogon.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="./assets/script.js"></script> 
+  </body>
+</html>
