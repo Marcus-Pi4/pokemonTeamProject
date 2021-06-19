@@ -100,3 +100,23 @@ contentButton1.addEventListener("click", hideContent1);
 contentButton2.addEventListener("click", hideContent2);
 contentButton3.addEventListener("click", hideContent3);
 
+fetch('https://pokeapi.co/api/v2/pokemon/bulbasaur')
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+        console.log(data.sprites.other["official-artwork"].front_default);
+        console.log(data.id);
+        console.log(data.name);
+        console.log(data.height);
+        console.log(data.weight);
+        console.log(data.moves);
+        console.log(data.sprites.back_default);
+        for (var i = 0; i < data.types.length; i++) {
+            console.log(data.types[i].type.name);
+        }
+        for (var i = 0; i < data.moves.length; i++) {
+            console.log(data.moves[i].move.name);
+        }
+    });
