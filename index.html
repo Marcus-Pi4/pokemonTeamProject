@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Favicon-->
+    <link rel="icon" id = "favicon" type="image/png" href="https://cdn2.bulbagarden.net/upload/f/f6/Dream_Cherish_Ball_Sprite.png"/>
     <!--CSS Framework-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-yellow.min.css" />
@@ -72,9 +74,11 @@
                                 <thead>
                                     <tr>
                                         <th class="mdl-data-table__cell--non-numeric">Gen #</th>
-                                        <th><button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="expand-table">
-                                            <i class="material-icons">view_list</i>
-                                          </button></th>
+                                        <th>
+                                            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="expand-table">
+                                                <i class="material-icons">expand_more</i>
+                                            </button>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody id="filter-list" style="display: none;">
@@ -135,6 +139,7 @@
                 <div class="mdl-mega-footer__bottom-section">
                     <div class="mdl-logo">Please check out these links for more information:</div><br />
                         <ul class="mdl-mega-footer__link-list">
+                            <li><a target="_blank" href="https://bulbapedia.bulbagarden.net/wiki/Main_Page">Bulbapedia.net</a></li>
                             <li><a target="_blank" href="https://www.serebii.net/">Serebii.net</a></li>
                             <li><a target="_blank" href="https://www.smogon.com/">Smogon.com</a></li>
                         </ul>

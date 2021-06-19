@@ -15,11 +15,13 @@ function hideTable() {
 }
 
 function hideList() {
-    console.log(filterList.getAttribute("style"));
+    console.log(tableButton.childNodes[1].textContent);
     let styleAtt = filterList.getAttribute("style");
     if (styleAtt==="display: none;"){
+        tableButton.childNodes[1].textContent = "expand_less"
         filterList.setAttribute("style", "display: content;");
     } else{
+        tableButton.childNodes[1].textContent = "expand_more"
         filterList.setAttribute("style", "display: none;");
     }
 }
