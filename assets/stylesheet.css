@@ -1,0 +1,22 @@
+.content {
+    margin:2%;
+    margin-top: 5%;
+    padding: 1%;
+}
+
+.content header {
+    background-color: darkblue;
+    color: white;
+    margin: auto;
+    margin-top: -50px;
+    padding: 1%; 
+    border-radius: 15px;
+    text-align: center;
+    width: fit-content;
+}
+
+.content h2 {
+    display: inline;
+    margin-right: 5px;
+    font-size: x-large;
+}
