@@ -1,11 +1,26 @@
+body,
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+body {
+    backdrop-filter: blur(5px);
+    background-image: url(forest.jpg);
+}
+
 .content {
+    background-color: white;
     margin:2%;
     margin-top: 5%;
     padding: 1%;
 }
 
 .content header {
-    background-color: darkblue;
+    background-color: rgb(189, 10, 10);
     color: white;
     margin: auto;
     margin-top: -50px;
@@ -20,3 +35,26 @@
     margin-right: 5px;
     font-size: x-large;
 }
+
+footer {
+    bottom: 0;
+}
+
+/* this is the css for the Pokemon page 
+Flying = #A890F0
+Psychic = #F85888
+Bug = #A8B820
+Rock = #B8A038
+Ghost = #705898
+Dark = #705848
+Dragon = #7038F8
+Steel = #B8B8D0
+Fairy = #F0B6BC
+Water = #6890F0
+Grass = #78C850
+Electric = #F8D030
+Ice = #98D8D8
+Fighting = #C03028
+Poison = #A040A0
+Ground = #E0C068
+*/

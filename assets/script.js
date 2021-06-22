@@ -91,11 +91,76 @@ function hideContent3() {
 
 }
 
-
-
-
 filterSwitch.addEventListener("click", hideTable);
 tableButton.addEventListener("click", hideList);
 contentButton1.addEventListener("click", hideContent1);
 contentButton2.addEventListener("click", hideContent2);
 contentButton3.addEventListener("click", hideContent3);
+
+const selectSearchElement = document.querySelector('#sample6');
+const selectSearchButton = document.querySelector('#search-button');
+
+//This is the function for taking querys from the search bar and displaying the information on the pokemon page
+selectSearchButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    const userSearchResult = selectSearchElement.value;
+    fetch(`https://pokeapi.co/api/v2/pokemon/${userSearchResult}`)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        let pokemonApiImage = data.sprites.other["official-artwork"].front_default;
+        document.getElementById("pokemon-name").textContent = data.name;
+        for (var i = 0; i < data.types.length; i++) {
+            document.getElementById('pokemon-type').textContent += data.types[i].type.name;
+        }
+        document.getElementById('pokemon-id').textContent = data.id;
+        document.getElementById('pokemon-weight').textContent = data.weight;
+        document.getElementById('pokemon-height').textContent = data.height;
+        document.getElementById('pokemon-artwork').src = pokemonApiImage;
+        document.getElementById('hp').textContent = data.stats[0].base_stat;
+        document.getElementById('attack').textContent = data.stats[1].base_stat;
+        document.getElementById('defence').textContent = data.stats[2].base_stat;
+        document.getElementById('special-attack').textContent = data.stats[3].base_stat;
+        document.getElementById('special-defence').textContent = data.stats[4].base_stat;
+        for (var i = 0; i < data.moves.length; i++) {
+            const moveList = document.getElementById('move-list');
+            const li = document.createElement("li");
+            li.appendChild(document.createTextNode(data.moves[i].move.name));
+            moveList.appendChild(li);            
+        }
+        getPokemonID (data.id);
+    });
+});
+
+function getPokemonID (id) {
+    fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        getPokemonEvolutions (data.evolution_chain.url);
+    });
+}
+
+function getPokemonEvolutions (url) {
+    fetch(url)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        if (data.chain.evolves_to.length === 0) {
+            document.getElementById('evolvesTo').textContent = 'This pokemon does not evolve';
+        }
+        else if (data.chain.evolves_to[0].species.name === document.getElementById('pokemon-name').textContent) {
+            document.getElementById('evolvesTo').textContent = data.chain.evolves_to[0].evolves_to[0].species.name;
+        
+        }
+        else if (data.chain.evolves_to[0].evolves_to[0].species.name === document.getElementById('pokemon-name').textContent) {
+            document.getElementById('evolvesTo').textContent = `Evolves from ${data.chain.evolves_to[0].species.name}`;
+        }
+        else {
+            document.getElementById('evolvesTo').textContent = data.chain.evolves_to[0].species.name;
+        }
+    });
+}

@@ -34,7 +34,7 @@
                                         <label class="mdl-textfield__label" for="sample-expandable">Pokemon or Move</label>
                                     </div>  
                                 </div>
-                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                <button id='search-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                                     <i class="material-icons">search</i>Search
                                 </button>
                             </form>
@@ -124,30 +124,59 @@
         <main class="mdl-layout__content">
             <div id="content1" class="content" style="border: 1px solid gray; border-radius: 15px;">
                 <header id="content-header1">
-                    <h2>Content Header</h2>
+                    <h2>Pokemon Info</h2>
                     <button id = "content-button1" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                         <i class="material-icons">expand_less</i>
                     </button>
                 </header>
-                <p id="content-p1" style="display:content;">Content paragraph</p>
+                <div id="content-p1" style="display:content;"> 
+                    <img id='pokemon-artwork' src="" alt="Pokemon artwork" width="300" height="300">
+                    <h2>Name:</h1>
+                    <h3 id='pokemon-name'></h2>
+                    <h2>Id:</h2>
+                    <h3 id='pokemon-id'></h3>
+                    <h2>Height:</h2>
+                    <h3 id='pokemon-height'></h3>
+                    <h2>Weight:</h2>
+                    <h3 id='pokemon-weight'></h3>
+                    <h2>Type:</h2>
+                    <h3 id='pokemon-type'></h2>
+                    <h2>Evolutions:</h2>
+                    <h3 id='evolvesTo'></h3>
+                </div>
             </div>
             <div id="content2" class="content" style="border: 1px solid gray; border-radius: 15px;">
                 <header id="content-header2">
-                    <h2>Content Header</h2>
+                    <h2>Stats</h2>
                     <button id = "content-button2" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                         <i class="material-icons">expand_less</i>
                     </button>
                 </header>
-                <p id="content-p2" style="display:content;">Content paragraph</p>
+                <div id="content-p2" style="display:content;">
+                    <h3 >HP:</h3>
+                    <h4 id="hp"></h4>
+                    <h3>Attack:</h3>
+                    <h4 id="attack"></h4>
+                    <h3>Defence:</h3>
+                    <h4 id="defence"></h4>
+                    <h3>Special Attack:</h3>
+                    <h4 id="special-attack"></h4>
+                    <h3>Special Defence:</h3>
+                    <h4 id="special-defence"></h4>
+                </div>
             </div>
             <div id="content3" class="content" style="border: 1px solid gray; border-radius: 15px;">
                 <header id="content-header3">
-                    <h2>Content Header</h2>
+                    <h2>Moves</h2>
                     <button id = "content-button3" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                         <i class="material-icons">expand_less</i>
                     </button>
                 </header>
-                <p id="content-p3" style="display:content;">Content paragraph</p>
+                <div id="content-p3" style="display:content;">
+                    <ul id="move-list">
+                    </ul>
+                    
+                </div>
             </div>
             <!--Footer has to be within main for formatting.-->
             <footer class="mdl-mega-footer">
