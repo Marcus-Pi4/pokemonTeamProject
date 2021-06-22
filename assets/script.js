@@ -100,36 +100,47 @@ contentButton1.addEventListener("click", hideContent1);
 contentButton2.addEventListener("click", hideContent2);
 contentButton3.addEventListener("click", hideContent3);
 
-fetch('https://pokeapi.co/api/v2/pokemon/ivysaur')
+
+fetch('https://pokeapi.co/api/v2/evolution-chain/2/')
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
         console.log(data);
-        console.log(data.sprites.other["official-artwork"].front_default);
-        console.log(data.id);
-        console.log(data.name);
-        console.log(data.height);
-        console.log(data.weight);
-        console.log(data.moves);
-        console.log(data.sprites.back_default);
-        console.log(data.stats[0].base_stats);
-        for (var i = 0; i < data.stats.length; i++) {
-            console.log(data.stats[i].base_stat);
-        }
-        for (var i = 0; i < data.types.length; i++) {
-            console.log(data.types[i].type.name);
-        }
-        for (var i = 0; i < data.moves.length; i++) {
-            console.log(data.moves[i].move.name);
-        }
     });
-fetch('https://pokeapi.co/api/v2/evolution-chain/1/')
+
+const selectSearchElement = document.querySelector('#sample6');
+const selectSearchButton = document.querySelector('#search-button');
+
+//This is the function for taking querys from the search bar and displaying the information on the pokemon page
+selectSearchButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    const userSearchResult = selectSearchElement.value;
+    fetch(`https://pokeapi.co/api/v2/pokemon/${userSearchResult}`)
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
-        console.log(data.chain.species.name);
-        console.log(data.chain.evolves_to[0].evolves_to[0].species.name);
-
+        let pokemonApiImage = data.sprites.other["official-artwork"].front_default;
+        document.getElementById("pokemon-name").textContent = data.name;
+        console.log(data);
+        for (var i = 0; i < data.types.length; i++) {
+            document.getElementById('pokemon-type').textContent += data.types[i].type.name;
+        }
+        document.getElementById('pokemon-id').textContent = data.id;
+        document.getElementById('pokemon-weight').textContent = data.weight;
+        document.getElementById('pokemon-height').textContent = data.height;
+        document.getElementById('pokemon-artwork').src = pokemonApiImage;
+        document.getElementById('hp').textContent = data.stats[0].base_stat;
+        document.getElementById('attack').textContent = data.stats[1].base_stat;
+        document.getElementById('defence').textContent = data.stats[2].base_stat;
+        document.getElementById('special-attack').textContent = data.stats[3].base_stat;
+        document.getElementById('special-defence').textContent = data.stats[4].base_stat;
+        for (var i = 0; i < data.moves.length; i++) {
+            const moveList = document.getElementById('move-list');
+            const li = document.createElement("li");
+            li.appendChild(document.createTextNode(data.moves[i].move.name));
+            moveList.appendChild(li);            
+        }
     });
+});
