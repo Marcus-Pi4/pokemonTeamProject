@@ -52,7 +52,7 @@ function hideContent1() {
     if (p1Style==="display: none;"){
         contentButton1.childNodes[1].textContent = "expand_less"
         contentP1.setAttribute("style", "display: content;");
-        contentContainer1.setAttribute("style", "border: 1px solid gray; border-radius: 15px;");
+        contentContainer1.setAttribute("style", "border: 1px solid gray; border-radius: 15px; background-color: white;");
     } else{
         contentButton1.childNodes[1].textContent = "expand_more"
         contentP1.setAttribute("style", "display: none;");
@@ -67,7 +67,7 @@ function hideContent2() {
     if (p2Style==="display: none;"){
         contentButton2.childNodes[1].textContent = "expand_less"
         contentP2.setAttribute("style", "display: content;");
-        contentContainer2.setAttribute("style", "border: 1px solid gray; border-radius: 15px;");
+        contentContainer2.setAttribute("style", "border: 1px solid gray; border-radius: 15px; background-color: white;");
     } else{
         contentButton2.childNodes[1].textContent = "expand_more"
         contentP2.setAttribute("style", "display: none;");
@@ -82,7 +82,7 @@ function hideContent3() {
     if (p3Style==="display: none;"){
         contentButton3.childNodes[1].textContent = "expand_less"
         contentP3.setAttribute("style", "display: content;");
-        contentContainer3.setAttribute("style", "border: 1px solid gray; border-radius: 15px;");
+        contentContainer3.setAttribute("style", "border: 1px solid gray; border-radius: 15px; background-color: white;");
     } else{
         contentButton3.childNodes[1].textContent = "expand_more"
         contentP3.setAttribute("style", "display: none;");
@@ -97,14 +97,13 @@ contentButton1.addEventListener("click", hideContent1);
 contentButton2.addEventListener("click", hideContent2);
 contentButton3.addEventListener("click", hideContent3);
 
-const selectSearchElement = document.querySelector('#sample6');
 const selectSearchButton = document.querySelector('#search-button');
 
-//This is the function for taking querys from the search bar and displaying the information on the pokemon page
-selectSearchButton.addEventListener('click', function(event) {
+//This is the function for taking queries from the search bar and displaying the information on the pokemon page
+
+function pokemonSearch (search) {
     event.preventDefault();
-    const userSearchResult = selectSearchElement.value;
-    fetch(`https://pokeapi.co/api/v2/pokemon/${userSearchResult}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${search}`)
     .then(function (response) {
         return response.json();
     })
@@ -127,11 +126,12 @@ selectSearchButton.addEventListener('click', function(event) {
             const moveList = document.getElementById('move-list');
             const li = document.createElement("li");
             li.appendChild(document.createTextNode(data.moves[i].move.name));
-            moveList.appendChild(li);            
+            moveList.appendChild(li);
         }
-        getPokemonID (data.id);
+        getPokemonID (data.id);            
+        
     });
-});
+};
 
 function getPokemonID (id) {
     fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
@@ -164,3 +164,17 @@ function getPokemonEvolutions (url) {
         }
     });
 }
+
+function handleSubmit(event){
+    let selectSearchElement = document.querySelector('#gsc-i-id1');
+    let userSearchResult = selectSearchElement.value;
+    if ((location.href.includes("index.html"))||(location.href.includes("moves.html"))) {
+        window.location.replace("./pokemon.html");
+        pokemonSearch(userSearchResult);
+    } else {
+        pokemonSearch(userSearchResult);
+    }
+
+}
+
+selectSearchButton.addEventListener('click', handleSubmit);

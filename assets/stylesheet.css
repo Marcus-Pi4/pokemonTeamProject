@@ -13,7 +13,6 @@ body {
 }
 
 .content {
-    background-color: white;
     margin:2%;
     margin-top: 5%;
     padding: 1%;
@@ -38,6 +37,14 @@ body {
 
 footer {
     bottom: 0;
+}
+
+.gsc-clear-button {
+    display: none;
+}
+
+.gsc-search-button {
+    display: block;
 }
 
 /* this is the css for the Pokemon page 
