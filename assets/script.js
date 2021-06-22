@@ -91,23 +91,11 @@ function hideContent3() {
 
 }
 
-
-
-
 filterSwitch.addEventListener("click", hideTable);
 tableButton.addEventListener("click", hideList);
 contentButton1.addEventListener("click", hideContent1);
 contentButton2.addEventListener("click", hideContent2);
 contentButton3.addEventListener("click", hideContent3);
-
-
-fetch('https://pokeapi.co/api/v2/evolution-chain/2/')
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        console.log(data);
-    });
 
 const selectSearchElement = document.querySelector('#sample6');
 const selectSearchButton = document.querySelector('#search-button');
@@ -123,7 +111,6 @@ selectSearchButton.addEventListener('click', function(event) {
     .then(function (data) {
         let pokemonApiImage = data.sprites.other["official-artwork"].front_default;
         document.getElementById("pokemon-name").textContent = data.name;
-        console.log(data);
         for (var i = 0; i < data.types.length; i++) {
             document.getElementById('pokemon-type').textContent += data.types[i].type.name;
         }
@@ -142,5 +129,38 @@ selectSearchButton.addEventListener('click', function(event) {
             li.appendChild(document.createTextNode(data.moves[i].move.name));
             moveList.appendChild(li);            
         }
+        getPokemonID (data.id);
     });
 });
+
+function getPokemonID (id) {
+    fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        getPokemonEvolutions (data.evolution_chain.url);
+    });
+}
+
+function getPokemonEvolutions (url) {
+    fetch(url)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        if (data.chain.evolves_to.length === 0) {
+            document.getElementById('evolvesTo').textContent = 'This pokemon does not evolve';
+        }
+        else if (data.chain.evolves_to[0].species.name === document.getElementById('pokemon-name').textContent) {
+            document.getElementById('evolvesTo').textContent = data.chain.evolves_to[0].evolves_to[0].species.name;
+        
+        }
+        else if (data.chain.evolves_to[0].evolves_to[0].species.name === document.getElementById('pokemon-name').textContent) {
+            document.getElementById('evolvesTo').textContent = `Evolves from ${data.chain.evolves_to[0].species.name}`;
+        }
+        else {
+            document.getElementById('evolvesTo').textContent = data.chain.evolves_to[0].species.name;
+        }
+    });
+}
