@@ -126,15 +126,39 @@ function pokemonSearch (search) {
         document.getElementById('pokemon-weight').textContent = data.weight;
         document.getElementById('pokemon-height').textContent = data.height;
         document.getElementById('pokemon-artwork').src = pokemonApiImage;
-        
+
         getPokemonID(data.id); 
 
-        //document.getElementById('pokemon-type').innerHTML = `<span id="type-container">${handleTypes(data.types)}</span>`;
+        console.log(data.types);
+        let typeDiv = document.getElementById("pokemon-type")
+        let typeContainer = document.createElement("div");
+        typeContainer.setAttribute("id","type-container");
+        let typesEl = document.createElement("h3");
+        if (typeDiv.childElementCount>0){
+            typeDiv.children[0].remove();
+            typeDiv.append(typeContainer);
+            for (var i=0; i<data.types.length; i++){
+                typesEl = document.createElement("h3");
+                typesEl.setAttribute("id","type");
+                typesEl.textContent = data.types[i].type.name;
+                typeContainer.appendChild(typesEl);
+            }
+        } else {
+            typeDiv.append(typeContainer);
+            for (var i=0; i<data.types.length; i++){
+                typesEl = document.createElement("h3");
+                typesEl.setAttribute("id","type");
+                typesEl.textContent = data.types[i].type.name;
+                typeContainer.appendChild(typesEl);
+            }
+            //if (types[i]==="")
+            
+        }        
 
         //Changes 2nd content div.
-        document.getElementById('hp').textContent = data.stats[0].base_stat;
+        document.getElementById('hp').textContent = data.stats[0].base_stat; 
         document.getElementById('attack').textContent = data.stats[1].base_stat;
-        document.getElementById('defence').textContent = data.stats[2].base_stat;
+        document.getElementById('defense').textContent = data.stats[2].base_stat;
         document.getElementById('special-attack').textContent = data.stats[3].base_stat;
         document.getElementById('special-defence').textContent = data.stats[4].base_stat;
 
@@ -143,7 +167,7 @@ function pokemonSearch (search) {
         moveList.className = "move-list";
         if (contentP3.childElementCount>0){
             contentP3.children[0].remove();
-            contentP3.append(moveList)
+            contentP3.append(moveList);
             for (var i = 0; i < data.moves.length; i++) {
                 let moveListEl = document.getElementById('move-list');
                 let li = document.createElement("li");
@@ -195,26 +219,21 @@ function getPokemonEvolutions (url) {
 }
 
 function handleTypes (types){
+    console.log(types);
     if (types.length>1){
         for (var i=0; i<types.length; i++){
-            document.getElementById("type-container").innerHTML = (`<h3 id="type${[i+1]}>${types[i]}</h3>`);
+            document.getElementById("type-container").innerHTML = (`<h3 id="type">${types[i].type.name}</h3>`);
             //if (types[i]==="")
         }
     } else {
-        document.getElementById("type-container").innerHTML = (`<h3 id="type1}>${types[0]}</h3>`)
+        document.getElementById("type-container").innerHTML = (`<h3 id="type1}>${types[0].type.name}</h3>`)
     }
 }
 
 function handleSubmit(event){
     let selectSearchElement = document.querySelector('#gsc-i-id1');
     let userSearchResult = selectSearchElement.value;
-    if ((location.href.includes("index.html"))||(location.href.includes("moves.html"))) {
-        window.location.replace("./pokemon.html");
-        pokemonSearch(userSearchResult);
-    } else {
-        pokemonSearch(userSearchResult);
-    }
-
+    pokemonSearch(userSearchResult);
 }
 
 selectSearchButton.addEventListener('click', handleSubmit);
