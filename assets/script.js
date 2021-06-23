@@ -108,28 +108,57 @@ function pokemonSearch (search) {
         return response.json();
     })
     .then(function (data) {
+        //Shows content if hidden on search. 
+        contentButton1.childNodes[1].textContent = "expand_less"
+        contentP1.setAttribute("style", "display: content;");
+        contentContainer1.setAttribute("style", "border: 1px solid gray; border-radius: 15px; background-color: white;");
+        contentButton2.childNodes[1].textContent = "expand_less"
+        contentP2.setAttribute("style", "display: content;");
+        contentContainer2.setAttribute("style", "border: 1px solid gray; border-radius: 15px; background-color: white;");
+        contentButton3.childNodes[1].textContent = "expand_less"
+        contentP3.setAttribute("style", "display: content;");
+        contentContainer3.setAttribute("style", "border: 1px solid gray; border-radius: 15px; background-color: white;");
+
         let pokemonApiImage = data.sprites.other["official-artwork"].front_default;
+        //Changes first content div.
         document.getElementById("pokemon-name").textContent = data.name;
-        for (var i = 0; i < data.types.length; i++) {
-            document.getElementById('pokemon-type').textContent += data.types[i].type.name;
-        }
         document.getElementById('pokemon-id').textContent = data.id;
         document.getElementById('pokemon-weight').textContent = data.weight;
         document.getElementById('pokemon-height').textContent = data.height;
         document.getElementById('pokemon-artwork').src = pokemonApiImage;
+        
+        getPokemonID(data.id); 
+
+        //document.getElementById('pokemon-type').innerHTML = `<span id="type-container">${handleTypes(data.types)}</span>`;
+
+        //Changes 2nd content div.
         document.getElementById('hp').textContent = data.stats[0].base_stat;
         document.getElementById('attack').textContent = data.stats[1].base_stat;
         document.getElementById('defence').textContent = data.stats[2].base_stat;
         document.getElementById('special-attack').textContent = data.stats[3].base_stat;
         document.getElementById('special-defence').textContent = data.stats[4].base_stat;
-        for (var i = 0; i < data.moves.length; i++) {
-            const moveList = document.getElementById('move-list');
-            const li = document.createElement("li");
-            li.appendChild(document.createTextNode(data.moves[i].move.name));
-            moveList.appendChild(li);
-        }
-        getPokemonID (data.id);            
-        
+
+        //Places Moves into 3rd content div.
+        let moveList = document.createElement("ul");
+        moveList.className = "move-list";
+        if (contentP3.childElementCount>0){
+            contentP3.children[0].remove();
+            contentP3.append(moveList)
+            for (var i = 0; i < data.moves.length; i++) {
+                let moveListEl = document.getElementById('move-list');
+                let li = document.createElement("li");
+                li.appendChild(document.createTextNode(data.moves[i].move.name));
+                moveList.appendChild(li);
+            }  
+        } else {
+            contentP3.appendChild(moveList)
+            for (var i = 0; i < data.moves.length; i++) {
+                let moveListEl = document.getElementById('move-list');
+                let li = document.createElement("li");
+                li.appendChild(document.createTextNode(data.moves[i].move.name));
+                moveList.appendChild(li);
+            }  
+        }       
     });
 };
 
@@ -163,6 +192,17 @@ function getPokemonEvolutions (url) {
             document.getElementById('evolvesTo').textContent = data.chain.evolves_to[0].species.name;
         }
     });
+}
+
+function handleTypes (types){
+    if (types.length>1){
+        for (var i=0; i<types.length; i++){
+            document.getElementById("type-container").innerHTML = (`<h3 id="type${[i+1]}>${types[i]}</h3>`);
+            //if (types[i]==="")
+        }
+    } else {
+        document.getElementById("type-container").innerHTML = (`<h3 id="type1}>${types[0]}</h3>`)
+    }
 }
 
 function handleSubmit(event){
