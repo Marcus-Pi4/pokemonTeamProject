@@ -1,9 +1,3 @@
-//Sets constants from the search table. 
-const filterSwitch = document.getElementById("filter-switch").parentNode;
-const filterTable = document.getElementById("filter-table");
-const filterList = document.getElementById("filter-list");
-const tableButton = document.getElementById("expand-table");
-
 //Content Container Constants
 const contentContainer1 = document.getElementById("content1");
 const contentContainer2 = document.getElementById("content2");
@@ -23,27 +17,6 @@ const contentButton3 = document.getElementById("content-button3");
 const contentP1 = document.getElementById("content-p1");
 const contentP2 = document.getElementById("content-p2");
 const contentP3 = document.getElementById("content-p3");
-
-//Hides table of filters.
-function hideTable() {
-    if (filterSwitch.classList.contains("is-checked")){
-        filterTable.setAttribute("style", "display:none");
-    } else {
-        filterTable.setAttribute("style", "");
-    }
-}
-
-//Hides lists within table. 
-function hideList() {
-    let styleAtt = filterList.getAttribute("style");
-    if (styleAtt==="display: none;"){
-        tableButton.childNodes[1].textContent = "expand_less"
-        filterList.setAttribute("style", "display: content;");
-    } else{
-        tableButton.childNodes[1].textContent = "expand_more"
-        filterList.setAttribute("style", "display: none;");
-    }
-}
 
 //Hides first content paragraph.
 function hideContent1() {
@@ -91,8 +64,6 @@ function hideContent3() {
 
 }
 
-filterSwitch.addEventListener("click", hideTable);
-tableButton.addEventListener("click", hideList);
 contentButton1.addEventListener("click", hideContent1);
 contentButton2.addEventListener("click", hideContent2);
 contentButton3.addEventListener("click", hideContent3);
@@ -129,7 +100,6 @@ function pokemonSearch (search) {
 
         getPokemonID(data.id); 
 
-        console.log(data.types);
         let typeDiv = document.getElementById("pokemon-type")
         let typeContainer = document.createElement("div");
         typeContainer.setAttribute("id","type-container");
@@ -216,18 +186,6 @@ function getPokemonEvolutions (url) {
             document.getElementById('evolvesTo').textContent = data.chain.evolves_to[0].species.name;
         }
     });
-}
-
-function handleTypes (types){
-    console.log(types);
-    if (types.length>1){
-        for (var i=0; i<types.length; i++){
-            document.getElementById("type-container").innerHTML = (`<h3 id="type">${types[i].type.name}</h3>`);
-            //if (types[i]==="")
-        }
-    } else {
-        document.getElementById("type-container").innerHTML = (`<h3 id="type1}>${types[0].type.name}</h3>`)
-    }
 }
 
 function handleSubmit(event){
