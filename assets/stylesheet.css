@@ -13,9 +13,8 @@ body {
 }
 
 .content {
-    background-color: white;
     margin:2%;
-    margin-top: 5%;
+    margin-top: 80px;
     padding: 1%;
 }
 
@@ -30,6 +29,13 @@ body {
     width: fit-content;
 }
 
+.content img {
+    border: 1px solid black;
+    background-color: gray;
+    border-radius: 15px;
+    box-shadow: 2px 5px 15px rgb(53, 51, 51);
+}
+
 .content h2 {
     display: inline;
     margin-right: 5px;
@@ -38,6 +44,14 @@ body {
 
 footer {
     bottom: 0;
+}
+
+.gsc-clear-button {
+    display: none;
+}
+
+.gsc-search-button {
+    display: block;
 }
 
 /* this is the css for the Pokemon page 

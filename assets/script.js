@@ -1,9 +1,3 @@
-//Sets constants from the search table. 
-const filterSwitch = document.getElementById("filter-switch").parentNode;
-const filterTable = document.getElementById("filter-table");
-const filterList = document.getElementById("filter-list");
-const tableButton = document.getElementById("expand-table");
-
 //Content Container Constants
 const contentContainer1 = document.getElementById("content1");
 const contentContainer2 = document.getElementById("content2");
@@ -24,27 +18,6 @@ const contentP1 = document.getElementById("content-p1");
 const contentP2 = document.getElementById("content-p2");
 const contentP3 = document.getElementById("content-p3");
 
-//Hides table of filters.
-function hideTable() {
-    if (filterSwitch.classList.contains("is-checked")){
-        filterTable.setAttribute("style", "display:none");
-    } else {
-        filterTable.setAttribute("style", "");
-    }
-}
-
-//Hides lists within table. 
-function hideList() {
-    let styleAtt = filterList.getAttribute("style");
-    if (styleAtt==="display: none;"){
-        tableButton.childNodes[1].textContent = "expand_less"
-        filterList.setAttribute("style", "display: content;");
-    } else{
-        tableButton.childNodes[1].textContent = "expand_more"
-        filterList.setAttribute("style", "display: none;");
-    }
-}
-
 //Hides first content paragraph.
 function hideContent1() {
     let p1Style = contentP1.getAttribute("style");
@@ -52,7 +25,7 @@ function hideContent1() {
     if (p1Style==="display: none;"){
         contentButton1.childNodes[1].textContent = "expand_less"
         contentP1.setAttribute("style", "display: content;");
-        contentContainer1.setAttribute("style", "border: 1px solid gray; border-radius: 15px;");
+        contentContainer1.setAttribute("style", "border: 1px solid gray; border-radius: 15px; background-color: white;");
     } else{
         contentButton1.childNodes[1].textContent = "expand_more"
         contentP1.setAttribute("style", "display: none;");
@@ -67,7 +40,7 @@ function hideContent2() {
     if (p2Style==="display: none;"){
         contentButton2.childNodes[1].textContent = "expand_less"
         contentP2.setAttribute("style", "display: content;");
-        contentContainer2.setAttribute("style", "border: 1px solid gray; border-radius: 15px;");
+        contentContainer2.setAttribute("style", "border: 1px solid gray; border-radius: 15px; background-color: white;");
     } else{
         contentButton2.childNodes[1].textContent = "expand_more"
         contentP2.setAttribute("style", "display: none;");
@@ -82,7 +55,7 @@ function hideContent3() {
     if (p3Style==="display: none;"){
         contentButton3.childNodes[1].textContent = "expand_less"
         contentP3.setAttribute("style", "display: content;");
-        contentContainer3.setAttribute("style", "border: 1px solid gray; border-radius: 15px;");
+        contentContainer3.setAttribute("style", "border: 1px solid gray; border-radius: 15px; background-color: white;");
     } else{
         contentButton3.childNodes[1].textContent = "expand_more"
         contentP3.setAttribute("style", "display: none;");
@@ -91,47 +64,97 @@ function hideContent3() {
 
 }
 
-filterSwitch.addEventListener("click", hideTable);
-tableButton.addEventListener("click", hideList);
 contentButton1.addEventListener("click", hideContent1);
 contentButton2.addEventListener("click", hideContent2);
 contentButton3.addEventListener("click", hideContent3);
 
-const selectSearchElement = document.querySelector('#sample6');
 const selectSearchButton = document.querySelector('#search-button');
 
-//This is the function for taking querys from the search bar and displaying the information on the pokemon page
-selectSearchButton.addEventListener('click', function(event) {
+//This is the function for taking queries from the search bar and displaying the information on the pokemon page
+
+function pokemonSearch (search) {
     event.preventDefault();
-    const userSearchResult = selectSearchElement.value;
-    fetch(`https://pokeapi.co/api/v2/pokemon/${userSearchResult}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${search}`)
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
+        //Shows content if hidden on search. 
+        contentButton1.childNodes[1].textContent = "expand_less"
+        contentP1.setAttribute("style", "display: content;");
+        contentContainer1.setAttribute("style", "border: 1px solid gray; border-radius: 15px; background-color: white;");
+        contentButton2.childNodes[1].textContent = "expand_less"
+        contentP2.setAttribute("style", "display: content;");
+        contentContainer2.setAttribute("style", "border: 1px solid gray; border-radius: 15px; background-color: white;");
+        contentButton3.childNodes[1].textContent = "expand_less"
+        contentP3.setAttribute("style", "display: content;");
+        contentContainer3.setAttribute("style", "border: 1px solid gray; border-radius: 15px; background-color: white;");
+
         let pokemonApiImage = data.sprites.other["official-artwork"].front_default;
+        //Changes first content div.
         document.getElementById("pokemon-name").textContent = data.name;
-        for (var i = 0; i < data.types.length; i++) {
-            document.getElementById('pokemon-type').textContent += data.types[i].type.name;
-        }
         document.getElementById('pokemon-id').textContent = data.id;
         document.getElementById('pokemon-weight').textContent = data.weight;
         document.getElementById('pokemon-height').textContent = data.height;
         document.getElementById('pokemon-artwork').src = pokemonApiImage;
-        document.getElementById('hp').textContent = data.stats[0].base_stat;
+
+        getPokemonID(data.id); 
+
+        let typeDiv = document.getElementById("pokemon-type")
+        let typeContainer = document.createElement("div");
+        typeContainer.setAttribute("id","type-container");
+        let typesEl = document.createElement("h3");
+        if (typeDiv.childElementCount>0){
+            typeDiv.children[0].remove();
+            typeDiv.append(typeContainer);
+            for (var i=0; i<data.types.length; i++){
+                typesEl = document.createElement("h3");
+                typesEl.setAttribute("id","type");
+                typesEl.textContent = data.types[i].type.name;
+                typeContainer.appendChild(typesEl);
+            }
+        } else {
+            typeDiv.append(typeContainer);
+            for (var i=0; i<data.types.length; i++){
+                typesEl = document.createElement("h3");
+                typesEl.setAttribute("id","type");
+                typesEl.textContent = data.types[i].type.name;
+                typeContainer.appendChild(typesEl);
+            }
+            //if (types[i]==="")
+            
+        }        
+
+        //Changes 2nd content div.
+        document.getElementById('hp').textContent = data.stats[0].base_stat; 
         document.getElementById('attack').textContent = data.stats[1].base_stat;
-        document.getElementById('defence').textContent = data.stats[2].base_stat;
+        document.getElementById('defense').textContent = data.stats[2].base_stat;
         document.getElementById('special-attack').textContent = data.stats[3].base_stat;
         document.getElementById('special-defence').textContent = data.stats[4].base_stat;
-        for (var i = 0; i < data.moves.length; i++) {
-            const moveList = document.getElementById('move-list');
-            const li = document.createElement("li");
-            li.appendChild(document.createTextNode(data.moves[i].move.name));
-            moveList.appendChild(li);            
-        }
-        getPokemonID (data.id);
+
+        //Places Moves into 3rd content div.
+        let moveList = document.createElement("ul");
+        moveList.className = "move-list";
+        if (contentP3.childElementCount>0){
+            contentP3.children[0].remove();
+            contentP3.append(moveList);
+            for (var i = 0; i < data.moves.length; i++) {
+                let moveListEl = document.getElementById('move-list');
+                let li = document.createElement("li");
+                li.appendChild(document.createTextNode(data.moves[i].move.name));
+                moveList.appendChild(li);
+            }  
+        } else {
+            contentP3.appendChild(moveList)
+            for (var i = 0; i < data.moves.length; i++) {
+                let moveListEl = document.getElementById('move-list');
+                let li = document.createElement("li");
+                li.appendChild(document.createTextNode(data.moves[i].move.name));
+                moveList.appendChild(li);
+            }  
+        }       
     });
-});
+};
 
 function getPokemonID (id) {
     fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
@@ -164,3 +187,11 @@ function getPokemonEvolutions (url) {
         }
     });
 }
+
+function handleSubmit(event){
+    let selectSearchElement = document.querySelector('#gsc-i-id1');
+    let userSearchResult = selectSearchElement.value;
+    pokemonSearch(userSearchResult);
+}
+
+selectSearchButton.addEventListener('click', handleSubmit);
