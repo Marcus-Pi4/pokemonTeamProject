@@ -40,6 +40,26 @@
                                 </button>
                             </form>
                         </li>
+                        <li class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                Pokemon
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <label id="pokemon-button" class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pokemon">
+                                    <input type="radio" id="pokemon" class="mdl-radio__button" name="options" value="1" checked />
+                                </label>
+                            </span>
+                        </li>
+                        <li class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                Move
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <label  id="move-button" class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="moves">
+                                    <input type="radio" id="moves" class="mdl-radio__button" name="options" value="1" checked />
+                                </label>
+                            </span>
+                        </li>
                     </ul>
                 </sidebar>
             </nav>
@@ -47,29 +67,35 @@
         <main class="mdl-layout__content">
             <div id="content1" class="content" style="border-top: 2px dotted gray;">
                 <header id="content-header1">
-                    <h2>Pokemon Info</h2>
+                    <h2>Info</h2>
                     <button id = "content-button1" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                         <i class="material-icons">expand_more</i>
                     </button>
                 </header>
-                <div id="content-p1" style="display:none;"> 
-                    <img id='pokemon-artwork' src="" alt="Pokemon artwork" width="300" height="300">
-                    <br />
-                    <h2>Name:</h2>
-                    <h3 id='pokemon-name'></h3>
-                    <h2>Pokedex #:</h2>
-                    <h3 id='pokemon-id'></h3>
-                    <h2>Height:</h2>
-                    <h3 id='pokemon-height'></h3>
-                    <h2>Weight:</h2>
-                    <h3 id='pokemon-weight'></h3>
-                    <h2>Type:</h2>
-                    <div id='pokemon-type'>
-                        <div id='type-container'>
+                <div id="content-p1" style="display:none;">
+                    <div id="content-pokemon1" style="display:none;"> 
+                        <img id='pokemon-artwork' src="" alt="Pokemon artwork" width="300" height="300">
+                        <br />
+                        <h2>Name:</h2>
+                        <h3 id='pokemon-name'></h3>
+                        <h2>Pokedex #:</h2>
+                        <h3 id='pokemon-id'></h3>
+                        <h2>Height:</h2>
+                        <h3 id='pokemon-height'></h3>
+                        <h2>Weight:</h2>
+                        <h3 id='pokemon-weight'></h3>
+                        <h2>Type:</h2>
+                        <div id='pokemon-type'>
+                            <div id='type-container'>
+                            </div>
                         </div>
+                        <h2>Evolutions:</h2>
+                        <h3 id='evolvesTo'></h3>
                     </div>
-                    <h2>Evolutions:</h2>
-                    <h3 id='evolvesTo'></h3>
+                    <div id="content-move1" style="display:none;">
+                        <h2 id="move-name"></h2>
+                        <p id="move-description"></p>
+                    </div>
                 </div>
             </div>
             <div id="content2" class="content" style="border-top: 2px dotted gray;">
@@ -80,33 +106,66 @@
                     </button>
                 </header>
                 <div id="content-p2" style="display:none;">
-                    <h2>HP:</h2>
-                    <h2 id="hp"></h2>
-                    <br />
-                    <h2>Attack:</h2>
-                    <h2 id="attack"></h2>
-                    <br />
-                    <h2>Defense:</h2>
-                    <h2 id="defense"></h2>
-                    <br />
-                    <h2>Special Attack:</h2>
-                    <h2 id="special-attack"></h2>
-                    <br />
-                    <h2>Special Defence:</h2>
-                    <h2 id="special-defence"></h2>
+                    <div id="content-pokemon2" style="display:none;">
+                        <h2>HP:</h2>
+                        <h2 id="hp"></h2>
+                        <br />
+                        <h2>Attack:</h2>
+                        <h2 id="attack"></h2>
+                        <br />
+                        <h2>Defense:</h2>
+                        <h2 id="defense"></h2>
+                        <br />
+                        <h2>Special Attack:</h2>
+                        <h2 id="special-attack"></h2>
+                        <br />
+                        <h2>Special Defense:</h2>
+                        <h2 id="special-defense"></h2>
+                    </div>
+                    <div id="content-move2" style="display:none;">
+                        <table id="move-stats-table" class="mdl-data-table mdl-js-data-table">
+                            <tbody>
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric">Type</td>
+                                    <td id="move-type"></td>
+                                </tr>
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric">Category</td>
+                                    <td id="move-category"></td>
+                                </tr>
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric">PP</td>
+                                    <td id="move-pp"></td>
+                                </tr>
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric">Power</td>
+                                    <td id="move-power"></td>
+                                </tr>
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric">Accuracy</td>
+                                    <td id="move-accuracy"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div id="content3" class="content" style="border-top: 2px dotted gray;">
                 <header id="content-header3">
-                    <h2>Moves</h2>
+                    <h2>Pokemon/Moves</h2>
                     <button id = "content-button3" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                         <i class="material-icons">expand_more</i>
                     </button>
                 </header>
                 <div id="content-p3" style="display:none;">
-                    <ul class="move-list">
-
-                    </ul>
+                    <div id="content-pokemon3" style="display:none;">
+                        <ul class="move-list">
+                        </ul>
+                    </div>
+                    <div id="content-move3" style="display:none;">
+                        <ul id="pokemon-list">
+                        </ul>
+                    </div>
                 </div>
             </div>
             <!--Footer has to be within main for formatting.-->
